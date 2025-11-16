@@ -74,15 +74,69 @@ description: Use this skill when [trigger conditions] - [what it does]
 Your skill content goes here...
 ```
 
-### Install Skill (Coming Soon)
+### Install Skill
 
-Install a skill from GitHub:
+Install a skill from a GitHub repository to your project's `.claude/skills` directory:
 
 ```bash
-agent-cli install-skill <github-repo-url>
+agent-cli install-skill <github-repo-url> <skill-name>
 ```
 
-## Project Structure
+**Example:**
+
+```bash
+# Install the systematic-debugging skill from obra/superpowers
+agent-cli install-skill https://github.com/obra/superpowers.git systematic-debugging
+
+# Output: Skill installed at .claude/skills/systematic-debugging/
+```
+
+**What it does:**
+1. Clones the repository to a temporary directory (`/tmp`)
+2. Searches for the specified skill folder using ripgrep
+3. Validates the skill has proper structure (SKILL.md with YAML frontmatter)
+4. Copies the skill to `.claude/skills/<skill-name>/`
+5. Cleans up temporary files
+6. Always installs the latest version from the default branch
+
+### List Skills
+
+List all installed skills in your project:
+
+```bash
+agent-cli list-skills
+```
+
+**Example output:**
+
+```
+Installed Skills (1):
+
+1. systematic-debugging
+   Use when encountering any bug, test failure, or unexpected behavior...
+   Location: .claude/skills/systematic-debugging
+```
+
+### Remove Skill
+
+Remove an installed skill from your project:
+
+```bash
+agent-cli remove-skill <skill-name>
+```
+
+**Example:**
+
+```bash
+agent-cli remove-skill systematic-debugging
+
+# Output:
+# Removing skill: systematic-debugging
+# Location: /path/to/.claude/skills/systematic-debugging
+# ✓ Skill "systematic-debugging" removed successfully!
+```
+
+## CLI Tool Structure
 
 ```
 agent-cli/
@@ -92,7 +146,9 @@ agent-cli/
 ├── src/
 │   ├── commands/
 │   │   ├── generate-skill.js    # Generate skill command
-│   │   └── install-skill.js     # Install skill command (future)
+│   │   ├── install-skill.js     # Install skill command
+│   │   ├── list-skills.js       # List skills command
+│   │   └── remove-skill.js      # Remove skill command
 │   ├── parsers/
 │   │   └── markdown-parser.js   # Parse markdown headers
 │   └── generators/

@@ -2,6 +2,9 @@
 
 const { Command } = require('commander');
 const { executeGenerateSkill } = require('../src/commands/generate-skill');
+const { executeInstallSkill } = require('../src/commands/install-skill');
+const { executeListSkills } = require('../src/commands/list-skills');
+const { executeRemoveSkill } = require('../src/commands/remove-skill');
 
 const program = new Command();
 
@@ -20,10 +23,26 @@ program
 
 program
   .command('install-skill')
-  .description('Install a skill from GitHub via npx (coming soon)')
-  .argument('[repo]', 'GitHub repository URL')
+  .description('Install a skill from a GitHub repository')
+  .argument('<repo-url>', 'GitHub repository URL')
+  .argument('<skill-name>', 'Name of the skill folder in the repository')
+  .action((repoUrl, skillName) => {
+    executeInstallSkill(repoUrl, skillName);
+  });
+
+program
+  .command('list-skills')
+  .description('List all installed skills')
   .action(() => {
-    console.log('install-skill command coming soon!');
+    executeListSkills();
+  });
+
+program
+  .command('remove-skill')
+  .description('Remove an installed skill')
+  .argument('<skill-name>', 'Name of the skill to remove')
+  .action((skillName) => {
+    executeRemoveSkill(skillName);
   });
 
 program.parse();
