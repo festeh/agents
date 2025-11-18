@@ -1,7 +1,7 @@
 {
   "name": "@festeh/agent-cli",
-  "version": "1.0.2",
-  "description": "CLI tool for managing agent skills and specifications",
+  "version": "1.0.3",
+  "description": "CLI tool for managing Claude Code skills - install, list, and remove skills from GitHub",
   "main": "bin/agent-cli.js",
   "bin": {
     "agent-cli": "bin/agent-cli.js"

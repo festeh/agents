@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const { Command } = require('commander');
-const { executeGenerateSkill } = require('../src/commands/generate-skill');
 const { executeInstallSkill } = require('../src/commands/install-skill');
 const { executeListSkills } = require('../src/commands/list-skills');
 const { executeRemoveSkill } = require('../src/commands/remove-skill');
@@ -10,16 +9,8 @@ const program = new Command();
 
 program
   .name('agent-cli')
-  .description('CLI tool for managing agent skills and specifications')
-  .version('1.0.0');
-
-program
-  .command('generate-skill')
-  .description('Generate a SKILL.md file from a description.md file')
-  .argument('<skill-name>', 'Name of the skill directory containing description.md')
-  .action((skillName) => {
-    executeGenerateSkill(skillName);
-  });
+  .description('CLI tool for managing Claude Code skills')
+  .version('1.0.3');
 
 program
   .command('install-skill')

@@ -1,6 +1,6 @@
 # agent-cli
 
-A CLI tool for managing agent skills and specifications for Claude Code and other agent platforms.
+A CLI tool for managing Claude Code skills - install, list, and remove skills from GitHub repositories.
 
 ## Installation
 
@@ -25,72 +25,9 @@ npm install
 npm link  # To use globally as 'agent-cli'
 ```
 
-## Project Structure
-
-This project expects the following directory structure at the root:
-
-```
-project-root/
-├── templates/              # Template definitions
-│   └── <skill-name>/
-│       └── description.md
-├── skills/                 # Generated skills
-│   └── <skill-name>/
-│       └── SKILL.md
-└── agent-cli/             # This CLI tool
-```
-
 ## Usage
 
 All examples below use `npx @festeh/agent-cli`. If you installed globally, you can use `agent-cli` instead.
-
-### Generate Skill
-
-Generate a Claude skill from a template's `description.md` file:
-
-```bash
-npx @festeh/agent-cli generate-skill <skill-name>
-```
-
-**Example:**
-
-```bash
-# Given: templates/visualizer-spec/description.md exists
-npx @festeh/agent-cli generate-skill visualizer-spec
-
-# Output: skills/visualizer-spec/SKILL.md created
-```
-
-### Input Format
-
-The `description.md` file should follow this format:
-
-```markdown
--- Name
-skill-name
-
--- Description
-Use this skill when [trigger conditions] - [what it does]
-
-# Content
-
-Your skill content goes here...
-```
-
-### Output Format
-
-The generated `SKILL.md` file will have YAML frontmatter:
-
-```yaml
----
-name: skill-name
-description: Use this skill when [trigger conditions] - [what it does]
----
-
-# Content
-
-Your skill content goes here...
-```
 
 ### Install Skill
 
@@ -167,15 +104,10 @@ agent-cli/
 ├── bin/
 │   └── agent-cli.js             # CLI entry point
 ├── src/
-│   ├── commands/
-│   │   ├── generate-skill.js    # Generate skill command
-│   │   ├── install-skill.js     # Install skill command
-│   │   ├── list-skills.js       # List skills command
-│   │   └── remove-skill.js      # Remove skill command
-│   ├── parsers/
-│   │   └── markdown-parser.js   # Parse markdown headers
-│   └── generators/
-│       └── skill-generator.js   # Generate SKILL.md with YAML
+│   └── commands/
+│       ├── install-skill.js     # Install skill command
+│       ├── list-skills.js       # List skills command
+│       └── remove-skill.js      # Remove skill command
 └── README.md
 ```
 
