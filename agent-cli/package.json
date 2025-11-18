@@ -1,10 +1,10 @@
 {
-  "name": "agent-cli",
-  "version": "1.0.0",
+  "name": "@festeh/agent-cli",
+  "version": "1.0.1",
   "description": "CLI tool for managing agent skills and specifications",
   "main": "bin/agent-cli.js",
   "bin": {
-    "agent-cli": "./bin/agent-cli.js"
+    "agent-cli": "bin/agent-cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,10 +13,25 @@
     "agent",
     "cli",
     "skill",
-    "claude"
+    "claude",
+    "ai",
+    "automation"
   ],
-  "author": "",
+  "author": "festeh",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/festeh/agent-cli.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "README.md",
+    "package.json"
+  ],
   "dependencies": {
     "commander": "^12.0.0"
   }

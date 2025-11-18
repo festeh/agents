@@ -1,0 +1,26 @@
+# Directories not needed in npm package
+node_modules/
+.git/
+.vscode/
+.idea/
+
+# Test and development files
+test/
+tests/
+*.test.js
+*.spec.js
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Other
+.env
+.env.*
+*.swp
+*.swo
+*~

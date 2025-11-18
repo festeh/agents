@@ -4,7 +4,23 @@ A CLI tool for managing agent skills and specifications for Claude Code and othe
 
 ## Installation
 
+### Quick Start (npx - no installation needed)
+
 ```bash
+npx @festeh/agent-cli <command>
+```
+
+### Global Installation
+
+```bash
+npm install -g @festeh/agent-cli
+agent-cli <command>
+```
+
+### Development Setup
+
+```bash
+cd agent-cli
 npm install
 npm link  # To use globally as 'agent-cli'
 ```
@@ -26,19 +42,21 @@ project-root/
 
 ## Usage
 
+All examples below use `npx @festeh/agent-cli`. If you installed globally, you can use `agent-cli` instead.
+
 ### Generate Skill
 
 Generate a Claude skill from a template's `description.md` file:
 
 ```bash
-agent-cli generate-skill <skill-name>
+npx @festeh/agent-cli generate-skill <skill-name>
 ```
 
 **Example:**
 
 ```bash
 # Given: templates/visualizer-spec/description.md exists
-agent-cli generate-skill visualizer-spec
+npx @festeh/agent-cli generate-skill visualizer-spec
 
 # Output: skills/visualizer-spec/SKILL.md created
 ```
@@ -79,14 +97,14 @@ Your skill content goes here...
 Install a skill from a GitHub repository to your project's `.claude/skills` directory:
 
 ```bash
-agent-cli install-skill <github-repo-url> <skill-name>
+npx @festeh/agent-cli install-skill <github-repo-url> <skill-name>
 ```
 
 **Example:**
 
 ```bash
 # Install the systematic-debugging skill from obra/superpowers
-agent-cli install-skill https://github.com/obra/superpowers.git systematic-debugging
+npx @festeh/agent-cli install-skill https://github.com/obra/superpowers.git systematic-debugging
 
 # Output: Skill installed at .claude/skills/systematic-debugging/
 ```
@@ -104,7 +122,7 @@ agent-cli install-skill https://github.com/obra/superpowers.git systematic-debug
 List all installed skills in your project:
 
 ```bash
-agent-cli list-skills
+npx @festeh/agent-cli list-skills
 ```
 
 **Example output:**
@@ -122,13 +140,13 @@ Installed Skills (1):
 Remove an installed skill from your project:
 
 ```bash
-agent-cli remove-skill <skill-name>
+npx @festeh/agent-cli remove-skill <skill-name>
 ```
 
 **Example:**
 
 ```bash
-agent-cli remove-skill systematic-debugging
+npx @festeh/agent-cli remove-skill systematic-debugging
 
 # Output:
 # Removing skill: systematic-debugging
