@@ -37,7 +37,10 @@ Continue asking until you have enough detail to address all 5 specification sect
 
 ### Phase 2: Write Specification (ONLY after "DOSPEC" command)
 
-Once user confirms with "DOSPEC", write the complete specification following the structure below.
+Once user confirms with "DOSPEC":
+1. Create a directory named after the visualization (use kebab-case, e.g., `projectile-motion`)
+2. Create a `SPEC.md` file inside that directory
+3. Write the complete specification to that file following the structure below
 
 ## Specification Structure
 

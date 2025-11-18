@@ -1,5 +1,5 @@
 ---
-name: visualizer-spec-implementer
+name: visualizer-implementer
 description: Implements interactive JavaScript visualizations from specification files. Use when working with visualization spec files to create educational interactive demos using any appropriate JavaScript library. Handles spec parsing, creates standalone HTML/CSS/JS files, interactive controls, and animation implementation.
 ---
 
