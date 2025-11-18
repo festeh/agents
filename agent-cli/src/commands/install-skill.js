@@ -4,6 +4,26 @@ const { execSync } = require('child_process');
 const crypto = require('crypto');
 
 /**
+ * Normalizes repository input to a full GitHub URL
+ * @param {string} repoInput - Repository URL or shorthand (user/repo)
+ * @returns {string} - Full GitHub repository URL
+ */
+function normalizeRepoUrl(repoInput) {
+  // If already a full URL, return as-is
+  if (repoInput.startsWith('http://') || repoInput.startsWith('https://')) {
+    return repoInput;
+  }
+
+  // If shorthand format (user/repo), convert to GitHub URL
+  if (repoInput.includes('/') && !repoInput.includes(':')) {
+    return `https://github.com/${repoInput}.git`;
+  }
+
+  // Otherwise return as-is (might be a git URL or other format)
+  return repoInput;
+}
+
+/**
  * Clones a GitHub repository to a temporary directory
  * @param {string} repoUrl - GitHub repository URL
  * @returns {string} - Path to the cloned repository
@@ -166,18 +186,21 @@ function cleanup(tmpDir) {
 
 /**
  * Executes the install-skill command
- * @param {string} repoUrl - GitHub repository URL
+ * @param {string} repoInput - GitHub repository URL or shorthand (user/repo)
  * @param {string} skillName - Name of the skill folder to install
  */
-function executeInstallSkill(repoUrl, skillName) {
+function executeInstallSkill(repoInput, skillName) {
   let tmpDir = null;
 
   try {
-    if (!repoUrl || !skillName) {
-      throw new Error('Usage: agent-cli install-skill <github-repo-url> <skill-name>');
+    if (!repoInput || !skillName) {
+      throw new Error('Usage: agent-cli install-skill <github-repo-url|user/repo> <skill-name>');
     }
 
     const projectRoot = process.cwd();
+
+    // Normalize repository input to full URL
+    const repoUrl = normalizeRepoUrl(repoInput);
 
     // Step 1: Clone the repository
     tmpDir = cloneRepo(repoUrl);

@@ -97,16 +97,21 @@ Your skill content goes here...
 Install a skill from a GitHub repository to your project's `.claude/skills` directory:
 
 ```bash
+npx @festeh/agent-cli install-skill <user/repo> <skill-name>
+# or
 npx @festeh/agent-cli install-skill <github-repo-url> <skill-name>
 ```
 
-**Example:**
+**Examples:**
 
 ```bash
-# Install the systematic-debugging skill from obra/superpowers
+# Shorthand format (assumes GitHub)
+npx @festeh/agent-cli install-skill obra/superpowers systematic-debugging
+
+# Full URL format
 npx @festeh/agent-cli install-skill https://github.com/obra/superpowers.git systematic-debugging
 
-# Output: Skill installed at .claude/skills/systematic-debugging/
+# Both output: Skill installed at .claude/skills/systematic-debugging/
 ```
 
 **What it does:**
