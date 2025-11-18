@@ -40,8 +40,8 @@ Use CDN links for all libraries to keep implementations standalone.
 Generate a complete, self-contained implementation:
 
 **Required files:**
-- `index.html` - Main HTML structure with embedded or linked CSS/JS
-- Can be single-file (everything in HTML) or multi-file (separate CSS/JS)
+- `index.html` - Main HTML structure (required)
+- You may create separate CSS and JS files as needed for better organization
 
 **Key requirements:**
 - Must work when opened directly in browser
@@ -142,7 +142,7 @@ Verify:
 - **Keep it simple**: Focus on demonstrating the concept clearly
 - **Provide immediate feedback**: Visual changes should respond to input instantly
 - **Add labels and guides**: Help users understand what they're seeing
-- **Use appropriate colors**: Choose colors that enhance understanding
+- **Use dark Catppuccin colors**: Apply the Catppuccin dark color palette for consistent, pleasing aesthetics
 - **Optimize performance**: Target 60fps for smooth animations
 - **Make it responsive**: Handle different screen sizes appropriately
 - **Include clear instructions**: Add text explaining how to interact with the visualization
