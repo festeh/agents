@@ -65,6 +65,9 @@ function findSkillFolder(repoPath, skillName) {
 
     const skillMdFiles = output.trim().split('\n').filter(Boolean);
 
+    // Collect all available skills
+    const availableSkills = skillMdFiles.map(skillMdPath => path.basename(path.dirname(skillMdPath)));
+
     // Check if any of these SKILL.md files are in a directory matching the skill name
     for (const skillMdPath of skillMdFiles) {
       const dir = path.dirname(skillMdPath);
@@ -84,7 +87,10 @@ function findSkillFolder(repoPath, skillName) {
     const directories = findOutput.trim().split('\n').filter(Boolean);
 
     if (directories.length === 0) {
-      throw new Error(`Skill folder "${skillName}" not found in repository`);
+      const skillsList = availableSkills.length > 0
+        ? `\nAvailable skills: ${availableSkills.join(', ')}`
+        : '\nNo skills found in repository';
+      throw new Error(`Skill folder "${skillName}" not found in repository${skillsList}`);
     }
 
     // Check if any of these directories contain a SKILL.md
