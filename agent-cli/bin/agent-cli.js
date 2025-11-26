@@ -4,13 +4,14 @@ const { Command } = require('commander');
 const { executeInstallSkill } = require('../src/commands/install-skill');
 const { executeListSkills } = require('../src/commands/list-skills');
 const { executeRemoveSkill } = require('../src/commands/remove-skill');
+const { version } = require('../package.json');
 
 const program = new Command();
 
 program
   .name('agent-cli')
   .description('CLI tool for managing Claude Code skills')
-  .version('1.0.3');
+  .version(version);
 
 program
   .command('install-skill')
