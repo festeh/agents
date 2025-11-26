@@ -15,8 +15,9 @@ Autonomously implement features based on comprehensive Linear ticket specificati
 
 ### 1. Read the Specification
 
-Use Linear MCP tools to read the ticket:
-- `linear_search_issues` with ticket ID or title
+Use linearis CLI to read the ticket:
+- `linearis issues read <issueId>` to get issue details (supports UUID and identifiers like ABC-123)
+- `linearis issues search <query>` to find issues by text
 - Parse the specification sections: Goal, Context, Implementation Steps, Acceptance Criteria
 - Verify specification completeness before proceeding
 
@@ -59,11 +60,11 @@ After completing all implementation steps:
 
 Once implementation is complete and verified:
 
-1. **Update ticket status** using `linear_update_issue`:
+1. **Update ticket status** using `linearis issues update <issueId> -s <state>`:
    - Change status to "In Review" or "Done" (based on project workflow)
    - Or move to appropriate next state
 
-2. **Add implementation comment** using `linear_add_comment`:
+2. **Add implementation comment** using `linearis comments create <issueId> --body <body>`:
    - Summarize what was implemented
    - Note any deviations from the spec (if any)
    - Link to relevant commits or PRs (if applicable)
@@ -138,21 +139,25 @@ Once implementation is complete and verified:
 - Re-run tests
 - Do not proceed to next steps until tests pass
 
-## Linear MCP Tool Usage
+## Linearis CLI Usage
 
 **Reading tickets:**
-- `linear_search_issues`: Find ticket by ID, title, or filters
-- Resource `linear-issue:///{issueId}`: Get full ticket details
+- `linearis issues read <issueId>` - Get issue details (supports UUID and identifiers like ABC-123)
+- `linearis issues search <query>` - Search issues by text
+  - Options: `--team`, `--assignee`, `--project`, `--states`, `--limit`
 - Read description for specification
 - Read comments for additional context
 
 **Updating tickets:**
-- `linear_update_issue`: Update status, priority, or description
+- `linearis issues update <issueId>` - Update issue fields
+  - `-s, --state <stateId>` - New state name or ID
+  - `-p, --priority <priority>` - New priority (1-4)
+  - `-d, --description <desc>` - New description
+  - `--assignee <assigneeId>` - New assignee
 - Common status transitions: "In Progress" → "In Review" → "Done"
-- Update assignee if needed
 
 **Adding comments:**
-- `linear_add_comment`: Document implementation progress
+- `linearis comments create <issueId> --body <body>` - Document implementation progress
 - Use for: completion notes, deviation explanations, test results
 - Supports markdown formatting
 
