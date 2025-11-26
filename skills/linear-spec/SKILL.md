@@ -1,6 +1,6 @@
 ---
 name: linear-spec
-description: Uses linearis CLI to read and refine a Linear ticket into a comprehensive specification, then creates a new git worktree and branch (both with the same name) ready for implementation. Does NOT implement the feature - stops after workspace setup.
+description: Uses linearis CLI to read and refine a Linear ticket into a comprehensive specification, then creates a new git worktree (with descriptive dir name) and branch (using ticket ID) ready for implementation. Does NOT implement the feature - stops after workspace setup.
 ---
 
 # Linear Specification Writer
@@ -8,7 +8,7 @@ description: Uses linearis CLI to read and refine a Linear ticket into a compreh
 
 ## Overview
 
-Transform incomplete Linear tickets into comprehensive, AI-implementable specifications with clear goals, explicit implementation steps, and testable acceptance criteria. After refining the specification, create a new git worktree and branch (both with the same name derived from the ticket) ready for implementation.
+Transform incomplete Linear tickets into comprehensive, AI-implementable specifications with clear goals, explicit implementation steps, and testable acceptance criteria. After refining the specification, create a new git worktree (with descriptive directory name) and branch (using ticket ID) ready for implementation.
 
 **Important:** This skill does NOT implement the feature. It stops after creating the workspace, leaving it ready for a separate implementation step.
 
@@ -58,13 +58,16 @@ Once the user confirms with **WRITESPEC**, update the Linear ticket:
 
 After the specification is written and verified:
 
-1. **Use Linear ticket ID as branch name** (e.g., `ABC-123`)
-2. **Create git worktree and branch**:
+1. **Derive directory name** from current directory and short feature description:
+   - Format: `<current-dir>-<short-feature-name>`
+   - Example: `myrepo-add-controller-support`
+2. **Use Linear ticket ID as branch name** (e.g., `ABC-123`)
+3. **Create git worktree and branch**:
    ```bash
-   git worktree add ../<ticket-id> -b <ticket-id>
+   git worktree add ../<dir-name> -b <ticket-id>
    ```
-3. **Confirm to user** that the workspace is ready at the new path
-4. **Stop here** - do NOT proceed with implementation
+4. **Confirm to user** that the workspace is ready at the new path
+5. **Stop here** - do NOT proceed with implementation
 
 ## Specification Structure
 
