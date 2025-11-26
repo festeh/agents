@@ -1,6 +1,6 @@
 ---
 name: linear-spec
-description: Uses Linear MCP to read and update a Linear ticket until it contains a comprehensive specification that an AI/LLM can implement directly. Use when a Linear ticket lacks implementation details, clear steps, or acceptance criteria. Transforms vague feature requests into actionable, AI-implementable specifications with explicit technical details.
+description: Uses linearis CLI to read and refine a Linear ticket into a comprehensive specification, then creates a new git worktree and branch (both with the same name) ready for implementation. Does NOT implement the feature - stops after workspace setup.
 ---
 
 # Linear Specification Writer
@@ -8,18 +8,21 @@ description: Uses Linear MCP to read and update a Linear ticket until it contain
 
 ## Overview
 
-Transform incomplete Linear tickets into comprehensive, AI-implementable specifications with clear goals, explicit implementation steps, and testable acceptance criteria. The specification should provide enough technical detail and context that an AI/LLM can autonomously implement the feature without ambiguity.
+Transform incomplete Linear tickets into comprehensive, AI-implementable specifications with clear goals, explicit implementation steps, and testable acceptance criteria. After refining the specification, create a new git worktree and branch (both with the same name derived from the ticket) ready for implementation.
+
+**Important:** This skill does NOT implement the feature. It stops after creating the workspace, leaving it ready for a separate implementation step.
 
 ## Workflow
 
-This skill follows a two-phase approach to ensure quality specifications:
+This skill follows a three-phase approach:
 
 ### Phase 1: Gather Context
 
 **DO NOT write the specification immediately.** First, thoroughly understand the ticket and project:
 
-1. **Read the Linear ticket** using Linear MCP tools:
-   - Use `linear_search_issues` with the ticket ID or title
+1. **Read the Linear ticket** using linearis CLI:
+   - Use `linearis issues read <issueId>` to get issue details (supports both UUID and identifiers like ABC-123)
+   - Use `linearis issues search <query>` to find issues by text
    - Review current description, comments, and metadata
    - Note priority, status, and assigned team
 
@@ -48,8 +51,23 @@ This skill follows a two-phase approach to ensure quality specifications:
 Once the user confirms with **WRITESPEC**, update the Linear ticket:
 
 1. **Compose the specification** following the structure below
-2. **Update the ticket** using `linear_update_issue` with the ticket ID
-3. **Verify the update** by reading the ticket again to confirm changes
+2. **Update the ticket** using `linearis issues update <issueId> -d <description>` with the ticket ID
+3. **Verify the update** by reading the ticket again with `linearis issues read <issueId>` to confirm changes
+
+### Phase 3: Create Workspace
+
+After the specification is written and verified:
+
+1. **Derive branch name** from the current directory name and a short feature description:
+   - Format: `<current-dir>-<short-feature-name>`
+   - Example: `myrepo-add-controller-support`
+   - Do NOT use Linear ticket IDs in the name
+2. **Create git worktree and branch**:
+   ```bash
+   git worktree add ../<branch-name> -b <branch-name>
+   ```
+3. **Confirm to user** that the workspace is ready at the new path
+4. **Stop here** - do NOT proceed with implementation
 
 ## Specification Structure
 
@@ -93,20 +111,26 @@ Testable requirements with explicit verification:
 - **Testing**: Unit tests verify A, integration tests verify B
 - **Edge Cases**: Handles invalid input, null values, error states
 
-## Linear MCP Tool Usage
+## Linearis CLI Usage
 
 **Reading issues:**
-- `linear_search_issues`: Search by text, team, status, assignee, or labels
-- `linear_get_user_issues`: Retrieve user-assigned issues
-- Resource: `linear-issue:///{issueId}` for specific issue details
+- `linearis issues read <issueId>` - Get issue details (supports UUID and identifiers like ABC-123)
+- `linearis issues search <query>` - Search issues by text
+  - Options: `--team`, `--assignee`, `--project`, `--states`, `--limit`
+- `linearis issues list` - List issues (use `--limit` to control results)
 
 **Updating issues:**
-- `linear_update_issue`: Update title, description, priority, or status
-- Pass the issue ID and new description field
-- Description supports markdown formatting
+- `linearis issues update <issueId>` - Update issue fields
+  - `-t, --title <title>` - New title
+  - `-d, --description <desc>` - New description (supports markdown)
+  - `-s, --state <stateId>` - New state name or ID
+  - `-p, --priority <priority>` - New priority (1-4)
+  - `--assignee <assigneeId>` - New assignee
+  - `--project <project>` - New project (name or ID)
+  - `--labels <labels>` - Labels (comma-separated)
 
 **Adding context:**
-- `linear_add_comment`: Add comments instead of updating description if noting specific discussions or decisions
+- `linearis comments create <issueId> --body <body>` - Add comments instead of updating description if noting specific discussions or decisions
 
 ## Best Practices
 
