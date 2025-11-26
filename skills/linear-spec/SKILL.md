@@ -116,7 +116,7 @@ Testable requirements with explicit verification:
 **Reading issues:**
 - `linearis issues read <issueId>` - Get issue details (supports UUID and identifiers like ABC-123)
 - `linearis issues search <query>` - Search issues by text
-  - Options: `--team`, `--assignee`, `--project`, `--states`, `--limit`
+  - Options: `--team`, `--project`, `--states`, `--limit`
 - `linearis issues list` - List issues (use `--limit` to control results)
 
 **Updating issues:**
@@ -125,7 +125,6 @@ Testable requirements with explicit verification:
   - `-d, --description <desc>` - New description (supports markdown)
   - `-s, --state <stateId>` - New state name or ID
   - `-p, --priority <priority>` - New priority (1-4)
-  - `--assignee <assigneeId>` - New assignee
   - `--project <project>` - New project (name or ID)
   - `--labels <labels>` - Labels (comma-separated)
 

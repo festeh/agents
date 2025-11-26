@@ -144,7 +144,7 @@ Once implementation is complete and verified:
 **Reading tickets:**
 - `linearis issues read <issueId>` - Get issue details (supports UUID and identifiers like ABC-123)
 - `linearis issues search <query>` - Search issues by text
-  - Options: `--team`, `--assignee`, `--project`, `--states`, `--limit`
+  - Options: `--team`, `--project`, `--states`, `--limit`
 - Read description for specification
 - Read comments for additional context
 
@@ -153,7 +153,6 @@ Once implementation is complete and verified:
   - `-s, --state <stateId>` - New state name or ID
   - `-p, --priority <priority>` - New priority (1-4)
   - `-d, --description <desc>` - New description
-  - `--assignee <assigneeId>` - New assignee
 - Common status transitions: "In Progress" → "In Review" → "Done"
 
 **Adding comments:**
