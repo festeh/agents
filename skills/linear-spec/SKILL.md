@@ -66,8 +66,9 @@ After the specification is written and verified:
    ```bash
    git worktree add ../<dir-name> -b <ticket-id>
    ```
-4. **Confirm to user** that the workspace is ready at the new path
-5. **Stop here** - do NOT proceed with implementation
+4. **Update Linear status** to In Progress: `linearis issues update <ticket-id> -s "In Progress"`
+5. **Confirm to user** that the workspace is ready at the new path
+6. **Stop here** - do NOT proceed with implementation
 
 ## Specification Structure
 
