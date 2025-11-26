@@ -22,8 +22,6 @@ Use linearis CLI to read the ticket:
 - Parse the specification sections: Goal, Context, Implementation Steps, Acceptance Criteria
 - Verify specification completeness before proceeding
 
-**IMPORTANT**: If the specification is incomplete, vague, or missing critical details, STOP and inform the user. Do not proceed with implementation. Suggest using the linear-spec skill first.
-
 ### 2. Plan the Implementation
 
 Before writing code:
@@ -57,19 +55,21 @@ After completing all implementation steps:
 4. **Test edge cases** - Validate error handling and edge cases
 5. **Build/compile** - Ensure the project builds successfully (if applicable)
 
-### 5. Update Linear Ticket
+### 5. Complete and Merge
 
-Once implementation is complete and verified:
+**Wait for user to type DONE** (any case) before proceeding with completion.
 
-1. **Update ticket status** using `linearis issues update <issueId> -s <state>`:
-   - Change status to "In Review" or "Done" (based on project workflow)
-   - Or move to appropriate next state
+Once the user confirms with **DONE**:
 
-2. **Add implementation comment** using `linearis comments create <issueId> --body <body>`:
-   - Summarize what was implemented
-   - Note any deviations from the spec (if any)
-   - Link to relevant commits or PRs (if applicable)
-   - Mention test results
+1. **Commit all changes** in the current worktree
+2. **Switch to main repo**: `cd ../$(basename $(pwd) | sed 's/-[^-]*$//')` (the original repo directory)
+3. **Merge the branch** to master/main
+4. **Update Linear status** to Done: `linearis issues update <ticket-id> -s Done`
+5. **Cleanup**: Remove the worktree and branch
+   ```bash
+   git worktree remove ../<worktree-dir>
+   git branch -d <ticket-id>
+   ```
 
 ## Implementation Guidelines
 
