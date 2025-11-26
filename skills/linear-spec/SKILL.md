@@ -58,13 +58,10 @@ Once the user confirms with **WRITESPEC**, update the Linear ticket:
 
 After the specification is written and verified:
 
-1. **Derive branch name** from the current directory name and a short feature description:
-   - Format: `<current-dir>-<short-feature-name>`
-   - Example: `myrepo-add-controller-support`
-   - Do NOT use Linear ticket IDs in the name
+1. **Use Linear ticket ID as branch name** (e.g., `ABC-123`)
 2. **Create git worktree and branch**:
    ```bash
-   git worktree add ../<branch-name> -b <branch-name>
+   git worktree add ../<ticket-id> -b <ticket-id>
    ```
 3. **Confirm to user** that the workspace is ready at the new path
 4. **Stop here** - do NOT proceed with implementation

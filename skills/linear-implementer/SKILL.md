@@ -15,9 +15,10 @@ Autonomously implement features based on comprehensive Linear ticket specificati
 
 ### 1. Read the Specification
 
+**Infer ticket from branch name**: The current git branch name should be the Linear ticket ID (e.g., `ABC-123`). Use `git branch --show-current` to get it.
+
 Use linearis CLI to read the ticket:
-- `linearis issues read <issueId>` to get issue details (supports UUID and identifiers like ABC-123)
-- `linearis issues search <query>` to find issues by text
+- `linearis issues read <branch-name>` to get issue details using the branch name as ticket ID
 - Parse the specification sections: Goal, Context, Implementation Steps, Acceptance Criteria
 - Verify specification completeness before proceeding
 
